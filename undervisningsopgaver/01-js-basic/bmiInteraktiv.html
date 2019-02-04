@@ -10,12 +10,12 @@
 
 <body>
     <script>
-        let height = 1.75;
-        let weight = 83;
-
-        let bmi = weight / (height * height);
+        let height = prompt("Angiv højde i cm");
+        let weight = prompt("Angiv vægt i kg");
+        let bmi = weight / ((height / 100) * (height / 100));
         let resultat;
-        //Hvis BMI'en er under 19, skal der stå: undervægtig
+
+
         if (bmi < 19) {
             resultat = "Undervægtig";
         }
@@ -40,12 +40,29 @@
             resultat = "Ekstremt fed";
         }
 
-        let bmiresultat = confirm(`Dit bmi tal er 1{bmi}. Vil du vide din vægtklasse?`);
 
-        console.log(
-            `Dit bmi er ${bmi} og din fedmeklasse er ${resultat}`);
+        if (weight == 0) {
+            alert(`Husk vægt bredde skal være et tal større end 0.\ n Prøv igen`);
+        }
+        if (height == 0) {
+            alert(`Husk højde skal være et tal større end 0.\ n Prøv igen`);
+        } else if (isNaN(bmi)) {
+            alert(`Fejl\ n Skriv kun tal`);
+        } else {
+            let fedmeklasse = confirm(`Din BMI er ${bmi}, kunne du tænke dig, at kende din vægtklasse?`);
 
+            if (fedmeklasse == true) {
+                alert(`Din vægtklasse er ${resultat}`);
+            } else {
+                alert(`Tak for nu: )`);
+            }
+        }
+
+
+
+        console.log(bmi);
     </script>
+
 </body>
 
 </html>
