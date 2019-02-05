@@ -29,12 +29,17 @@
 </head>
 
 <body>
-    <div class="firkant"> </div>
+    <div class="firkant"></div>
     <div class="cirkel "></div>
 
     <script>
-        document.querySelector(".firkant").textContent = "Grøn firkant";
-        document.querySelector(".cirkel").textContent = "Rød cirkel";
+        let firkantURL = `http://helf-kea.dk/test/frog.png`;
+        let cirkelURL = `http://helf-kea.dk/test/gris.png`;
+
+
+
+        document.querySelector(".firkant").innerHTML = `<img src= ${firkantURL} alt= >`;
+        document.querySelector(".cirkel").innerHTML = `<img src= ${cirkelURL} alt= >`;
 
     </script>
 </body>
