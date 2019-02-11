@@ -6,6 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Babushka</title>
     <style>
+        .splash {
+            background-image: url("imgs/BabushkaSplash.png");
+            background-color: #fff;
+            text-align: center;
+            background-repeat: no-repeat;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .menu {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
         img {
             max-height: 150px;
         }
@@ -40,43 +57,85 @@
 </head>
 
 <body>
+    <div class="splash">
+        <img src="imgs/BabushkaSplash.png" alt="Babushka.OG.Claudio">
+
+    </div>
+
+    <h1>BABUSHKA</h1>
 
     <div class="menu">
-        <button class="filter" data-hold="alle">Alle retter</button>
-        <button class="filter" data-hold="hovedretter">Hovedretter</button>
-        <button class="filter" data-hold="desserter">Desserter</button>
-        <button class="filter" data-hold="Drikkevarer">Drikkevarer</button>
-        <button class="filter" data-hold="sideorder">Sideorder</button>
+        <button class="filter" data-kategori="alle">Alle retter</button>
+        <button class="filter" data-kategori="hovedretter">Hovedretter</button>
+        <button class="filter" data-kategori="desserter">Desserter</button>
+        <button class="filter" data-kategori="drikkevarer">Drikkevarer</button>
+        <button class="filter" data-kategori="sideorders">Tilbehør</button>
     </div>
 
     <div id="liste"></div>
 
 
     <script>
-        document.addEventListener("DOMContentLoaded", hentJson);
-        console.log(hentJson);
-        let allePersoner = [];
-        async function hentJson() {
-            const myJson = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1jxxxFoWBuMJ1qhQ9BQIAyKHmP38XtAF9_sQr0xo5JLo");
-            allePersoner = await myJson.json();
-            visPersoner();
-        }
+        let retter = [];
+        let filter = "alle";
 
-        function visPersoner() {
-            let dest = document.querySelector("#liste");
-            allePersoner.forEach(personer => {
-                dest.innerHTML += `
-<div class="ret">
-<h2>Navn: ${personer.navn}</h2>
-<img src="imgs/small/${personer.billede}-sm.jpg">
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+
+
+            async function getJson() {
+                let jsonData = await fetch(https: "//mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1jxxxFoWBuMJ1qhQ9BQIAyKHmP38XtAF9_sQr0xo5JLo");
+                retter = await jsonData.json();
+                //                retter.sort((a, b) => {
+                //                    return (a.alder - b.alder);
+                //                });
+                //                retter.sort(a, b) => {
+                //                    return a.navn.localeCompare(b.navn);
+                //                }
+                visRetter();
+            }
+
+            function visRetter() {
+                let dest = document.querySelector("#liste");
+                dest.innerHTML = "";
+                retter.forEach(ret => {
+                    if (filter == "alle" || filter == ret.kategori) {
+                        dest.innerHTML += `
+                            <div class="ret">
+                                <h2>Navn: ${retter.navn}</h2>
+<img src="imgs/small/${retter.billede}-sm.jpg">
 <br>
-<p>Pris: ${personer.pris} DKK</p>
-<p>Kategori: ${personer.kategori}</p>
-<p>Kort: ${personer.kort}</p>
-<p>lang: ${personer.lang}</p>
-</div>`
-            })
-        }
+<p>Pris: ${retter.pris} DKK</p>
+<p>Kategori: ${retter.kategori}</p>
+<p>Kort: ${retter.kort}</p>
+<p>lang: ${retter.lang}</p>
+
+                            </div>
+
+                `;
+                    }
+                })
+            }
+            getJson();
+
+            document.querySelectorAll(".filter").forEach(but => {
+                but.addEventListener("click", filtrering);
+            });
+
+            function filtrering() {
+
+                document.querySelector("h1").textContent = this.textContent;
+                filter = this.getAttribute("data-kategori");
+                console.log(filter);
+                visRetter();
+            }
+            document.querySelectorAll(".filter").forEach(but => {
+                        but.classList.remove("valgt");
+                    } {
+                        this.classList.add("valgt")
+
+                    }
 
     </script>
 </body>
