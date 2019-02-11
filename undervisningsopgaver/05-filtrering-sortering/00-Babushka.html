@@ -100,7 +100,7 @@
                 let dest = document.querySelector("#liste");
                 dest.innerHTML = "";
                 retter.forEach(ret => {
-                    if (filter == "alle" || filter == ret.kategori) {
+                    if (filter == "alle" || filter == retter.kategori) {
                         dest.innerHTML += `
                             <div class="ret">
                                 <h2>Navn: ${retter.navn}</h2>
