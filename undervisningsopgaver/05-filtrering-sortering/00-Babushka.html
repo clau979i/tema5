@@ -37,7 +37,6 @@
             right: 2rem;
         }
 
-
         #luk button {
             font-size: 2rem;
             padding: 1rem 2rem;
@@ -122,12 +121,9 @@
     <script>
         let retter = [];
         let filter = "alle";
-
         document.addEventListener("DOMContentLoaded", start);
 
         function start() {
-
-
             async function getJson() {
                 let jsonData = await fetch("https://mandalskeawebspace.dk/claude_php/clean_up_spreadsheet.php?id=1jxxxFoWBuMJ1qhQ9BQIAyKHmP38XtAF9_sQr0xo5JLo");
                 retter = await jsonData.json();
@@ -154,36 +150,25 @@
 <p>Kategori: ${ret.kategori}</p>
 <p>Kort: ${ret.kort}</p>
 <p>lang: ${ret.lang}</p>
-
                             </div>
-
                 `;
                         dest.insertAdjacentHTML("beforeend", template);
                         dest.lastElementChild.addEventListener("click", () => {
                             visSingle(ret);
                         });
-
-
-
-
-
-
                     }
                 })
             }
             getJson();
-
             document.querySelectorAll(".filter").forEach(but => {
                 but.addEventListener("click", filtrering);
             });
 
             function filtrering() {
-
                 document.querySelector("h1").textContent = this.textContent;
                 filter = this.getAttribute("data-kategori");
                 console.log(filter);
                 visRetter();
-
                 document.querySelectorAll(".filter").forEach(but => {
                     but.classList.remove("valgt");
                 })
@@ -201,7 +186,6 @@
                             <p>${ret.historie} </p>
                         </aritcle>
 `;
-
             document.querySelector("#popup").style.display = "block";
             document.querySelector("#popup #luk").addEventListener("click", close);
         }
