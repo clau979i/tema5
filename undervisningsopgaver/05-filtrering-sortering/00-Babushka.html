@@ -159,21 +159,15 @@
 
                 `;
                         dest.insertAdjacentHTML("beforeend", template);
-                        dest.lastElementChild.addEventListener("click", visSingle);
+                        dest.lastElementChild.addEventListener("click", () => {
+                            visSingle(ret);
+                        });
 
-                        function visSingle() {
-                            document.querySelector("#indhold").innerHTML = `
-                        <article class="ret">
-                                <h2>${ret.navn}</h2>ret
-                            <img class="billede" src="${ret.billede}" alt="${ret.navn}">
-                                <p>Hold: ${ret.hold}, Alder:${ret.alder} </p>
-                            <h3>${ret.navn}´s historie</h3>
-                            <p>${ret.historie} </p>
-                        </aritcle>
-`;
 
-                            document.querySelector("#popup").style.display = "block";
-                        }
+
+
+
+
                     }
                 })
             }
@@ -195,6 +189,25 @@
                 })
                 this.classList.add("valgt");
             }
+        }
+
+        function visSingle(ret) {
+            document.querySelector("#indhold").innerHTML = `
+                        <article class="ret">
+                                <h2>${ret.navn}</h2>ret
+                            <img class="billede" src="${ret.billede}" alt="${ret.navn}">
+                                <p>Hold: ${ret.hold}, Alder:${ret.alder} </p>
+                            <h3>${ret.navn}´s historie</h3>
+                            <p>${ret.historie} </p>
+                        </aritcle>
+`;
+
+            document.querySelector("#popup").style.display = "block";
+            document.querySelector("#popup #luk").addEventListener("click", close);
+        }
+
+        function close() {
+            document.querySelector("#popup").style.display = "none";
         }
 
     </script>
